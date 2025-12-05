@@ -1,0 +1,8 @@
+FF Archive
+
+Version 1.0 - 01-12-2006
+	First release. Biggest issue is the multiple entries per file in the Local File browser.
+	Only one copy of the file is being saved, however multiple entries are being added to the tree.
+
+Version 1.01: 2019-07-27
+	Wow, been a few years since I added to this file, hunh? Refactoring in progress.

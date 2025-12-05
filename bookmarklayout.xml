@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<bookmarks>
+	<site name="sitename" count="totalcount">
+		<stories count="storycount">
+			<bookmark title="bookmarktitle></bookmark>
+		</stories>
+		<authors count="authorcount">
+			<bookmark title="bookmarktitle></bookmark>
+		</authors>
+		<c2group count="c2count">
+			<bookmark title="bookmarktitle></bookmark>
+		</c2group>
+	</site>
+</bookmarks>

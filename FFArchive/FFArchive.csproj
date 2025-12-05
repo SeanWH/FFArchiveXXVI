@@ -1,0 +1,143 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="Current">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B226D2EE-95D6-4C19-9FC1-AE6F1ABFC9AD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FFArchive</RootNamespace>
+    <AssemblyName>FFArchive</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.11.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.9\lib\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bookmarks\BookmarkList.cs" />
+    <Compile Include="Bookmarks\BookmarkManagerState.cs" />
+    <Compile Include="Bookmarks\BookmarkManagerStatus.cs" />
+    <Compile Include="Bookmarks\LinkTarget.cs" />
+    <Compile Include="GUI\RtfDisplayPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="History\HistoryDisplay.cs" />
+    <Compile Include="History\HistoryFile.cs" />
+    <Compile Include="LocalFiles\FileType.cs" />
+    <Compile Include="LocalFiles\LocalFileDisplay.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\AppSettings.cs" />
+    <Compile Include="Bookmarks\Bookmark.cs" />
+    <Compile Include="Bookmarks\BookmarkImporter.cs" />
+    <Compile Include="Bookmarks\BookmarkManager.cs" />
+    <Compile Include="Bookmarks\BookmarkReader.cs" />
+    <Compile Include="Bookmarks\BookmarkWriter.cs" />
+    <Compile Include="Bookmarks\SiteInfo.cs" />
+    <Compile Include="GUI\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FanFictionArchive.cs" />
+    <Compile Include="History\HistoryByDateCollection.cs" />
+    <Compile Include="History\HistoryList.cs" />
+    <Compile Include="History\HistoryEntry.cs" />
+    <Compile Include="History\HistoryManager.cs" />
+    <Compile Include="LocalFiles\Collections\AuthorCollection.cs" />
+    <Compile Include="LocalFiles\Collections\FileCollection.cs" />
+    <Compile Include="LocalFiles\Collections\GenreCollection.cs" />
+    <Compile Include="LocalFiles\Collections\SiteCollection.cs" />
+    <Compile Include="LocalFiles\Collections\TitleCollection.cs" />
+    <Compile Include="LocalFiles\LocalFileManager.cs" />
+    <Compile Include="LocalFiles\Objects\LocalFile.cs" />
+    <Compile Include="LocalFiles\Objects\LocalPath.cs" />
+    <Compile Include="GUI\Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Options.designer.cs">
+      <DependentUpon>Options.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\Form1.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Options.resx">
+      <DependentUpon>Options.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="LocalFiles\SiteProcessing\FanFictionDocument.cs" />
+    <Compile Include="Settings\XmlConfig.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-back_16.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-forward_16.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redo_16.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ChangeLog.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
