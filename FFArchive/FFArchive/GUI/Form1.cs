@@ -1,29 +1,21 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
-using System.IO;
-using System.Net;
-using System.Text;
-using System.Windows.Forms;
-
 using FFArchive.Bookmarks;
-using FFArchive.LocalFiles;
-using FFArchive.LocalFiles.Collections;
-using FFArchive.LocalFiles.Objects;
-using FFArchive.LocalFiles.SiteProcessing;
 using FFArchive.History;
+using FFArchive.LocalFiles;
+using FFArchive.LocalFiles.Objects;
 using FFArchive.Settings;
+
+using System;
+using System.Collections.Specialized;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace FFArchive.GUI
 {
     public partial class Form1 : Form
     {
-        private enum DocType { HTML, TEXT, RTF, UNKNOWN }
+        private enum DocType
+        { HTML, TEXT, RTF, UNKNOWN }
 
         private BookmarkManager _bm;
         private LocalFileManager _lfm;
@@ -41,11 +33,6 @@ namespace FFArchive.GUI
         private ToolStripStatusLabel _size;
 
         private bool _localfile = false;
-
-
-
-
-        #region Form Specific Code
 
         public Form1()
         {
@@ -70,10 +57,6 @@ namespace FFArchive.GUI
                 _bm.State = BookmarkManagerState.Save;
             }
         }
-
-        #endregion
-
-        #region Initialization Code
 
         private void InitializeSettings()
         {
@@ -121,10 +104,6 @@ namespace FFArchive.GUI
             _hm.State = HistoryManagerState.Init;
         }
 
-        #endregion
-
-        #region Main Menu Code
-
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form opt = new Options();
@@ -147,10 +126,6 @@ namespace FFArchive.GUI
             }
         }
 
-        #endregion
-
-        #region Bookmark Handling Code
-
         private void tvBookmarks_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -170,8 +145,6 @@ namespace FFArchive.GUI
             {
                 _tnmcea = e;
             }
-
-
         }
 
         private void AddBookmark_Click(object sender, EventArgs e)
@@ -201,10 +174,6 @@ namespace FFArchive.GUI
             }
         }
 
-        #endregion
-
-        #region Main Toolbar Code
-
         private void txtAddress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -233,10 +202,6 @@ namespace FFArchive.GUI
         {
             if (_wb != null) _wb.Refresh();
         }
-
-        #endregion
-
-        #region Document Display
 
         private void DisplayDocument(string address)
         {
@@ -289,6 +254,7 @@ namespace FFArchive.GUI
                         }
                     }
                     break;
+
                 case DocType.TEXT:
                 case DocType.RTF:
                     if ((o == null) || (!(o.GetType() == typeof(RichTextBox))))
@@ -308,7 +274,6 @@ namespace FFArchive.GUI
                         }
                         splitContainer1.Panel2.Controls.Clear();
                         splitContainer1.Panel2.Controls.Add(_rtb);
-
                     }
                     else
                     {
@@ -329,7 +294,6 @@ namespace FFArchive.GUI
 
         private void increaseTextSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             if (statusStrip1.Items.Count == 0)
             {
                 tsl = new ToolStripStatusLabel("Point Size:");
@@ -345,8 +309,6 @@ namespace FFArchive.GUI
             _size.Text = Convert.ToString(size);
             Font font = new Font(ff, size, FontStyle.Regular, GraphicsUnit.Point);
             _rtb.Font = font;
-
-
         }
 
         private void decreaseTextSizeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -366,14 +328,9 @@ namespace FFArchive.GUI
             _size.Text = Convert.ToString(size);
             Font font = new Font(ff, size, FontStyle.Regular, GraphicsUnit.Point);
             _rtb.Font = font;
-
         }
 
-        #endregion
-
-        #region Web Browser Code
-
-        void _wb_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private void _wb_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             while (!(_wb.ReadyState == WebBrowserReadyState.Interactive))
             {
@@ -411,7 +368,6 @@ namespace FFArchive.GUI
 
         private void wb_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
-
         }
 
         private void wb_CanGoBackChanged(object sender, EventArgs e)
@@ -457,10 +413,6 @@ namespace FFArchive.GUI
             this.Text = _wb.DocumentTitle;
         }
 
-        #endregion
-
-        #region Utility Code
-
         private string checkAddress(string address)
         {
             if (String.IsNullOrEmpty(address))
@@ -473,7 +425,6 @@ namespace FFArchive.GUI
                 {
                     address = "http://" + address;
                 }
-
             }
             return address;
         }
@@ -504,9 +455,11 @@ namespace FFArchive.GUI
                         case "html":
                             rtn = DocType.HTML;
                             break;
+
                         case "txt":
                             rtn = DocType.TEXT;
                             break;
+
                         case "rtf":
                             rtn = DocType.RTF;
                             break;
@@ -531,10 +484,6 @@ namespace FFArchive.GUI
             return rtn;
         }
 
-        #endregion
-
-        #region Local File Handling Code
-
         private void tvLocal_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -556,20 +505,23 @@ namespace FFArchive.GUI
                 case "HTM":
                     _lfm.ShowHtml = tsb.Checked;
                     break;
+
                 case "TXT":
                     _lfm.ShowText = tsb.Checked;
                     break;
+
                 case "RTF":
                     _lfm.ShowRtf = tsb.Checked;
                     break;
+
                 case "PDF":
                     _lfm.ShowPdf = tsb.Checked;
                     break;
+
                 case "FFX":
                     _lfm.ShowFfx = tsb.Checked;
                     break;
             }
-
         }
 
         private void fswLocalFiles_Created(object sender, FileSystemEventArgs e)
@@ -580,7 +532,6 @@ namespace FFArchive.GUI
                 LocalFile file = new LocalFile(e.FullPath);
                 LocalFileDisplay.AddFile(file, ref this.tvLocal);
             }
-
         }
 
         private void fswLocalFiles_Deleted(object sender, FileSystemEventArgs e)
@@ -588,10 +539,6 @@ namespace FFArchive.GUI
             LocalFile file = new LocalFile(e.FullPath);
             LocalFileDisplay.RemoveFile(file, ref this.tvLocal);
         }
-
-        #endregion
-
-        #region History Handling Code
 
         private void tvHistory_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
@@ -627,9 +574,6 @@ namespace FFArchive.GUI
 
         private void HistoryMenuDelete_Click(object sender, EventArgs e)
         {
-
         }
-
-        #endregion
     }
 }
