@@ -45,6 +45,7 @@ partial class HistoryNavPanel
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(259, 450);
         Controls.Add(HistoryTreeView);
+        DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft;
         Name = "HistoryNavPanel";
         Text = "History";
         ResumeLayout(false);

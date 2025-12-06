@@ -7,5 +7,6 @@ public partial class BookmarkNavPanel : DockContent
     public BookmarkNavPanel()
     {
         InitializeComponent();
+        AutoScaleMode = AutoScaleMode.Dpi;
     }
 }

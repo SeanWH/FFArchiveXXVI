@@ -45,7 +45,10 @@ partial class BookmarkNavPanel
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(240, 450);
         Controls.Add(BookmarkTreeView);
+        DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft;
+        HideOnClose = true;
         Name = "BookmarkNavPanel";
+        ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeftAutoHide;
         Text = "Bookmarks";
         ResumeLayout(false);
     }

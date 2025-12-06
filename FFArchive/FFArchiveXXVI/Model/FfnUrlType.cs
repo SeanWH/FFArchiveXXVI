@@ -5,5 +5,6 @@ public enum FfnUrlType
     Unknown,
     Story,
     Author,
-    C2Group
+    C2Group,
+    Page
 }

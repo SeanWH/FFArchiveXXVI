@@ -30,11 +30,11 @@ partial class LocalFileNavPanel
     {
         var resources = new System.ComponentModel.ComponentResourceManager(typeof(LocalFileNavPanel));
         LocalFileToolStrip = new ToolStrip();
-        LocalFileTreeView = new TreeView();
+        toolStripLabel1 = new ToolStripLabel();
         toolStripButton1 = new ToolStripButton();
         toolStripButton2 = new ToolStripButton();
         toolStripButton3 = new ToolStripButton();
-        toolStripLabel1 = new ToolStripLabel();
+        LocalFileTreeView = new TreeView();
         LocalFileToolStrip.SuspendLayout();
         SuspendLayout();
         // 
@@ -48,13 +48,11 @@ partial class LocalFileNavPanel
         LocalFileToolStrip.TabIndex = 0;
         LocalFileToolStrip.Text = "LocalFileToolStrip";
         // 
-        // LocalFileTreeView
+        // toolStripLabel1
         // 
-        LocalFileTreeView.Dock = DockStyle.Fill;
-        LocalFileTreeView.Location = new Point(0, 25);
-        LocalFileTreeView.Name = "LocalFileTreeView";
-        LocalFileTreeView.Size = new Size(238, 425);
-        LocalFileTreeView.TabIndex = 1;
+        toolStripLabel1.Name = "toolStripLabel1";
+        toolStripLabel1.Size = new Size(36, 22);
+        toolStripLabel1.Text = "Filter:";
         // 
         // toolStripButton1
         // 
@@ -89,11 +87,13 @@ partial class LocalFileNavPanel
         toolStripButton3.Text = "HTML";
         toolStripButton3.TextImageRelation = TextImageRelation.TextAboveImage;
         // 
-        // toolStripLabel1
+        // LocalFileTreeView
         // 
-        toolStripLabel1.Name = "toolStripLabel1";
-        toolStripLabel1.Size = new Size(36, 22);
-        toolStripLabel1.Text = "Filter:";
+        LocalFileTreeView.Dock = DockStyle.Fill;
+        LocalFileTreeView.Location = new Point(0, 25);
+        LocalFileTreeView.Name = "LocalFileTreeView";
+        LocalFileTreeView.Size = new Size(238, 425);
+        LocalFileTreeView.TabIndex = 1;
         // 
         // LocalFileNavPanel
         // 
@@ -102,6 +102,7 @@ partial class LocalFileNavPanel
         ClientSize = new Size(238, 450);
         Controls.Add(LocalFileTreeView);
         Controls.Add(LocalFileToolStrip);
+        DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft;
         Name = "LocalFileNavPanel";
         Text = "Local Files";
         LocalFileToolStrip.ResumeLayout(false);
