@@ -7,16 +7,16 @@ using WeifenLuo.WinFormsUI.Docking;
 
 public partial class MainForm : Form
 {
-    private BookmarkNavPanel _bookmarkNavPanel;
-    private HistoryNavPanel _historyNavPanel;
-    private LocalFileNavPanel _localFileNavPanel;
+    private readonly BookmarkNavPanel _bookmarkNavPanel;
+    private readonly HistoryNavPanel _historyNavPanel;
+    private readonly LocalFileNavPanel _localFileNavPanel;
 
-    private DeserializeDockContent _deserializeDockContent;
-    private bool _shouldSaveLayout = true;
+    private readonly DeserializeDockContent _deserializeDockContent;
+    private readonly bool _shouldSaveLayout = true;
     private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
     private AppSettings _appSettings;
-    private string _layoutFile;
+    private readonly string _layoutFile;
 
     public MainForm()
     {
@@ -27,7 +27,9 @@ public partial class MainForm : Form
         _appSettings = AppSettings.Current;
         _layoutFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.config");
 
-        InitUI();
+        _localFileNavPanel = new LocalFileNavPanel();
+        _bookmarkNavPanel = new BookmarkNavPanel();
+        _historyNavPanel = new HistoryNavPanel();
 
         _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
         visualStudioToolStripExtender1.DefaultRenderer = _toolStripProfessionalRenderer;
@@ -61,20 +63,13 @@ public partial class MainForm : Form
         }
     }
 
-    private void InitUI()
-    {
-        _localFileNavPanel = new LocalFileNavPanel();
-        _bookmarkNavPanel = new BookmarkNavPanel();
-        _historyNavPanel = new HistoryNavPanel();
-    }
-
     private void EnableVSRenderer(VisualStudioToolStripExtender.VsVersion version, ThemeBase theme)
     {
         visualStudioToolStripExtender1.SetStyle(menuStrip1, version, theme);
         visualStudioToolStripExtender1.SetStyle(statusStrip1, version, theme);
     }
 
-    private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+    private void OptionsToolStripMenuItem_Click(object sender, EventArgs e)
     {
         var settingsForm = new Settings();
         var result = settingsForm.ShowDialog();
@@ -159,11 +154,6 @@ public partial class MainForm : Form
 
         switch (AppSettings.Current.CurrentThemeName)
         {
-            case "Visual Studio 2003":
-                dockPanel1.Theme = vS2003Theme1;
-                EnableVSRenderer(VisualStudioToolStripExtender.VsVersion.Vs2003, vS2003Theme1);
-                break;
-
             case "Visual Studio 2005":
                 dockPanel1.Theme = vS2005Theme1;
                 EnableVSRenderer(VisualStudioToolStripExtender.VsVersion.Vs2005, vS2005Theme1);
