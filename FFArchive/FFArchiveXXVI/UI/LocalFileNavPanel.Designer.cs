@@ -28,7 +28,7 @@ partial class LocalFileNavPanel
     /// </summary>
     private void InitializeComponent()
     {
-        var resources = new System.ComponentModel.ComponentResourceManager(typeof(LocalFileNavPanel));
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LocalFileNavPanel));
         LocalFileToolStrip = new ToolStrip();
         toolStripLabel1 = new ToolStripLabel();
         toolStripButton1 = new ToolStripButton();
@@ -94,6 +94,9 @@ partial class LocalFileNavPanel
         LocalFileTreeView.Name = "LocalFileTreeView";
         LocalFileTreeView.Size = new Size(238, 425);
         LocalFileTreeView.TabIndex = 1;
+        LocalFileTreeView.AfterCollapse += LocalFileTreeView_AfterCollapse;
+        LocalFileTreeView.AfterExpand += LocalFileTreeView_AfterExpand;
+        LocalFileTreeView.BeforeSelect += LocalFileTreeView_BeforeSelect;
         // 
         // LocalFileNavPanel
         // 

@@ -4,7 +4,7 @@ public class ToolStripSpringComboBox : ToolStripComboBox
 {
     public override Size GetPreferredSize(Size constrainingSize)
     {
-        if (IsOnOverflow || Owner.Orientation == Orientation.Vertical)
+        if (IsOnOverflow || Owner?.Orientation == Orientation.Vertical)
         {
             return DefaultSize;
         }

@@ -85,7 +85,7 @@ partial class MainForm
         optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
         optionsToolStripMenuItem.Size = new Size(116, 22);
         optionsToolStripMenuItem.Text = "Options";
-        optionsToolStripMenuItem.Click += optionsToolStripMenuItem_Click;
+        optionsToolStripMenuItem.Click += OptionsToolStripMenuItem_Click;
         // 
         // statusStrip1
         // 

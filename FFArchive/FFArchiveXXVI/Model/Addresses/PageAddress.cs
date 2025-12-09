@@ -2,7 +2,9 @@
 
 using FFArchiveXXVI.Model.Extensions;
 
-public class PageAddress(string address, string? linkedId = null) : IFfnAddress
+using System.Diagnostics.CodeAnalysis;
+
+public sealed class PageAddress(string address, string? linkedId = null) : IFfnAddress
 {
     public string Address { get; } = address;
     public string? LinkedId { get; } = linkedId;
@@ -56,9 +58,9 @@ public class PageAddress(string address, string? linkedId = null) : IFfnAddress
             return false;
         }
 
-        if (obj is PageAddress address)
+        if (obj is PageAddress pageAddress)
         {
-            return Equals(address);
+            return Equals(pageAddress);
         }
 
         return false;
@@ -72,5 +74,20 @@ public class PageAddress(string address, string? linkedId = null) : IFfnAddress
         }
 
         return Address.StringHash256() ^ LinkedId.StringHash256() ^ nameof(LinkTarget).StringHash256();
+    }
+
+    public bool Equals(IFfnAddress? x, IFfnAddress? y)
+    {
+        return x?.Equals(y) ?? y is null;
+    }
+
+    public int GetHashCode([DisallowNull] IFfnAddress obj)
+    {
+        if (obj.LinkedId is null)
+        {
+            return obj.Address.StringHash256() ^ nameof(obj.LinkTarget).StringHash256();
+        }
+
+        return obj.Address.StringHash256() ^ obj.LinkedId.StringHash256() ^ nameof(obj.LinkTarget).StringHash256();
     }
 }

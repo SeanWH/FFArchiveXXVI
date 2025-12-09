@@ -60,23 +60,22 @@ public static class StringExtensions
 
     public static int StringHash256(this string val)
     {
-        using (var algo = new SHA256Managed())
+        using var algo = SHA256.Create();
+        algo.ComputeHash(Encoding.UTF8.GetBytes(val));
+        var result = algo.Hash;
+        if (result == null || result.Length < 4)
         {
-            algo.ComputeHash(Encoding.UTF8.GetBytes(val));
-            var result = algo.Hash;
-            return BitConverter.ToInt32(result, 0);
+            return 0;
         }
+        return BitConverter.ToInt32(result, 0);
     }
 
     public static string StripPunctuation(this string s)
     {
         var sb = new StringBuilder();
-        foreach (char c in s)
+        foreach (var c in s.Where(c => !char.IsPunctuation(c)))
         {
-            if (!char.IsPunctuation(c))
-            {
-                sb.Append(c);
-            }
+            sb.Append(c);
         }
 
         return sb.ToString();

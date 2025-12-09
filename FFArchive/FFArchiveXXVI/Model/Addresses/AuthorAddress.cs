@@ -2,7 +2,9 @@
 
 using FFArchiveXXVI.Model.Extensions;
 
-public class AuthorAddress(string authorName, string address, string linkedId) : IFfnAddress
+using System.Diagnostics.CodeAnalysis;
+
+public sealed class AuthorAddress(string authorName, string address, string linkedId) : IFfnAddress
 {
     public string Address { get; } = address;
     public string LinkedId { get; } = linkedId;
@@ -51,15 +53,25 @@ public class AuthorAddress(string authorName, string address, string linkedId) :
             return false;
         }
 
-        if (obj is IFfnAddress address)
+        if (obj is IFfnAddress authorAddress)
         {
-            return Equals(address);
+            return Equals(authorAddress);
         }
 
         return false;
     }
 
     public override int GetHashCode() => nameof(LinkTarget).StringHash256() ^ Address.StringHash256() ^ LinkedId.StringHash256() ^ AuthorName.StringHash256();
+
+    public bool Equals(IFfnAddress? x, IFfnAddress? y)
+    {
+        return x?.Equals(y) ?? y is null;
+    }
+
+    public int GetHashCode([DisallowNull] IFfnAddress obj)
+    {
+        return obj.GetHashCode();
+    }
 
     public static bool operator ==(AuthorAddress left, AuthorAddress right)
     {

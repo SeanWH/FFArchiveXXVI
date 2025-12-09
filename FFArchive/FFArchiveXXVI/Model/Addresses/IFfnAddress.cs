@@ -2,7 +2,7 @@
 
 using System;
 
-public interface IFfnAddress : IComparable<IFfnAddress>, IEquatable<IFfnAddress>
+public interface IFfnAddress : IComparable<IFfnAddress>, IEquatable<IFfnAddress>, IEqualityComparer<IFfnAddress>
 {
     string Address { get; }
     string? LinkedId { get; }
