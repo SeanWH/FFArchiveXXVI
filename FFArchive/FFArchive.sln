@@ -11,10 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFArchiver", "FFArchiver\FF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFArchiver.Tests", "FFArchiver.Tests\FFArchiver.Tests.csproj", "{ADC7E6BE-31B1-8F9A-5519-C37F844DCE70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NaeshLibrary.Tests", "NaeshLibrary.Tests\NaeshLibrary.Tests.csproj", "{8BA2C265-9617-D6F5-1E5E-7C299DA7F2D5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NaeshLibrary", "NaeshLibrary\NaeshLibrary.csproj", "{C8E26648-112F-D2E4-82AA-50F2297FF3A7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebView2WindowsFormsBrowser", "WebView2WindowsFormsBrowser\WebView2WindowsFormsBrowser.csproj", "{0518CB80-A3C4-46B7-0E9A-588B513A8021}"
 EndProject
 Global
@@ -39,14 +35,6 @@ Global
 		{ADC7E6BE-31B1-8F9A-5519-C37F844DCE70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADC7E6BE-31B1-8F9A-5519-C37F844DCE70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADC7E6BE-31B1-8F9A-5519-C37F844DCE70}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8BA2C265-9617-D6F5-1E5E-7C299DA7F2D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8BA2C265-9617-D6F5-1E5E-7C299DA7F2D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BA2C265-9617-D6F5-1E5E-7C299DA7F2D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8BA2C265-9617-D6F5-1E5E-7C299DA7F2D5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C8E26648-112F-D2E4-82AA-50F2297FF3A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8E26648-112F-D2E4-82AA-50F2297FF3A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8E26648-112F-D2E4-82AA-50F2297FF3A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8E26648-112F-D2E4-82AA-50F2297FF3A7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0518CB80-A3C4-46B7-0E9A-588B513A8021}.Debug|Any CPU.ActiveCfg = Release Stable APIs|Any CPU
 		{0518CB80-A3C4-46B7-0E9A-588B513A8021}.Debug|Any CPU.Build.0 = Release Stable APIs|Any CPU
 		{0518CB80-A3C4-46B7-0E9A-588B513A8021}.Release|Any CPU.ActiveCfg = Release Stable APIs|Any CPU

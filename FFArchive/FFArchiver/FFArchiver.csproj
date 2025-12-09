@@ -25,8 +25,4 @@
     <Folder Include="Data\EventArgs\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\NaeshLibrary\NaeshLibrary.csproj" />
-  </ItemGroup>
-
 </Project>
