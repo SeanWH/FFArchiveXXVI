@@ -30,60 +30,80 @@ partial class WebDocument
     {
         var resources = new System.ComponentModel.ComponentResourceManager(typeof(WebDocument));
         WebNavToolStrip = new ToolStrip();
-        toolStripButton1 = new ToolStripButton();
-        toolStripButton2 = new ToolStripButton();
-        toolStripButton3 = new ToolStripButton();
+        BackButton = new ToolStripButton();
+        ForwardButton = new ToolStripButton();
+        ReloadButton = new ToolStripButton();
         toolStripSeparator1 = new ToolStripSeparator();
+        WebAddressBox = new ToolStripSpringComboBox();
+        GoButton = new ToolStripButton();
         WebStatusStrip = new StatusStrip();
         webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
-        toolStripSpringComboBox1 = new ToolStripSpringComboBox();
+        StatusLabel = new ToolStripStatusLabel();
         WebNavToolStrip.SuspendLayout();
+        WebStatusStrip.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
         SuspendLayout();
         // 
         // WebNavToolStrip
         // 
-        WebNavToolStrip.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton3, toolStripSeparator1, toolStripSpringComboBox1 });
+        WebNavToolStrip.Items.AddRange(new ToolStripItem[] { BackButton, ForwardButton, ReloadButton, toolStripSeparator1, WebAddressBox, GoButton });
         WebNavToolStrip.Location = new Point(0, 0);
         WebNavToolStrip.Name = "WebNavToolStrip";
         WebNavToolStrip.Size = new Size(800, 25);
         WebNavToolStrip.TabIndex = 0;
         WebNavToolStrip.Text = "toolStrip1";
         // 
-        // toolStripButton1
+        // BackButton
         // 
-        toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
-        toolStripButton1.ImageTransparentColor = Color.Magenta;
-        toolStripButton1.Name = "toolStripButton1";
-        toolStripButton1.Size = new Size(23, 22);
-        toolStripButton1.Text = "toolStripButton1";
+        BackButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        BackButton.Image = (Image)resources.GetObject("BackButton.Image");
+        BackButton.ImageTransparentColor = Color.Magenta;
+        BackButton.Name = "BackButton";
+        BackButton.Size = new Size(23, 22);
+        BackButton.Text = "Back";
         // 
-        // toolStripButton2
+        // ForwardButton
         // 
-        toolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
-        toolStripButton2.ImageTransparentColor = Color.Magenta;
-        toolStripButton2.Name = "toolStripButton2";
-        toolStripButton2.Size = new Size(23, 22);
-        toolStripButton2.Text = "toolStripButton2";
+        ForwardButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        ForwardButton.Image = (Image)resources.GetObject("ForwardButton.Image");
+        ForwardButton.ImageTransparentColor = Color.Magenta;
+        ForwardButton.Name = "ForwardButton";
+        ForwardButton.Size = new Size(23, 22);
+        ForwardButton.Text = "Forward";
         // 
-        // toolStripButton3
+        // ReloadButton
         // 
-        toolStripButton3.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
-        toolStripButton3.ImageTransparentColor = Color.Magenta;
-        toolStripButton3.Name = "toolStripButton3";
-        toolStripButton3.Size = new Size(23, 22);
-        toolStripButton3.Text = "toolStripButton3";
+        ReloadButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        ReloadButton.Image = (Image)resources.GetObject("ReloadButton.Image");
+        ReloadButton.ImageTransparentColor = Color.Magenta;
+        ReloadButton.Name = "ReloadButton";
+        ReloadButton.Size = new Size(23, 22);
+        ReloadButton.Text = "Refresh";
         // 
         // toolStripSeparator1
         // 
         toolStripSeparator1.Name = "toolStripSeparator1";
         toolStripSeparator1.Size = new Size(6, 25);
         // 
+        // WebAddressBox
+        // 
+        WebAddressBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+        WebAddressBox.AutoCompleteSource = AutoCompleteSource.AllUrl;
+        WebAddressBox.Name = "WebAddressBox";
+        WebAddressBox.Size = new Size(659, 25);
+        // 
+        // GoButton
+        // 
+        GoButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        GoButton.Image = (Image)resources.GetObject("GoButton.Image");
+        GoButton.ImageTransparentColor = Color.Magenta;
+        GoButton.Name = "GoButton";
+        GoButton.Size = new Size(23, 22);
+        GoButton.Text = "toolStripButton1";
+        // 
         // WebStatusStrip
         // 
+        WebStatusStrip.Items.AddRange(new ToolStripItem[] { StatusLabel });
         WebStatusStrip.Location = new Point(0, 428);
         WebStatusStrip.Name = "WebStatusStrip";
         WebStatusStrip.Size = new Size(800, 22);
@@ -102,10 +122,11 @@ partial class WebDocument
         webView21.TabIndex = 2;
         webView21.ZoomFactor = 1D;
         // 
-        // toolStripSpringComboBox1
+        // StatusLabel
         // 
-        toolStripSpringComboBox1.Name = "toolStripSpringComboBox1";
-        toolStripSpringComboBox1.Size = new Size(682, 25);
+        StatusLabel.Name = "StatusLabel";
+        StatusLabel.Size = new Size(24, 17);
+        StatusLabel.Text = "Init";
         // 
         // WebDocument
         // 
@@ -119,6 +140,8 @@ partial class WebDocument
         Text = "WebDocument";
         WebNavToolStrip.ResumeLayout(false);
         WebNavToolStrip.PerformLayout();
+        WebStatusStrip.ResumeLayout(false);
+        WebStatusStrip.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)webView21).EndInit();
         ResumeLayout(false);
         PerformLayout();
@@ -129,9 +152,11 @@ partial class WebDocument
     private ToolStrip WebNavToolStrip;
     private StatusStrip WebStatusStrip;
     private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
-    private ToolStripButton toolStripButton1;
-    private ToolStripButton toolStripButton2;
-    private ToolStripButton toolStripButton3;
+    private ToolStripButton BackButton;
+    private ToolStripButton ForwardButton;
+    private ToolStripButton ReloadButton;
     private ToolStripSeparator toolStripSeparator1;
-    private ToolStripSpringComboBox toolStripSpringComboBox1;
+    private ToolStripSpringComboBox WebAddressBox;
+    private ToolStripButton GoButton;
+    private ToolStripStatusLabel StatusLabel;
 }
