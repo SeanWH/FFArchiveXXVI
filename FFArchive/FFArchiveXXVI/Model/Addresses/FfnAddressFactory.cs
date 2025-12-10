@@ -37,6 +37,11 @@ public static class FfnAddressFactory
 
     public static IFfnAddress GetAddress(string address)
     {
+        if (!address.Contains("fanfiction.net/"))
+        {
+            return new PageAddress(address);
+        }
+
         string[] parts = SplitAddress(address);
 
         return parts[TARGET_IDX] switch

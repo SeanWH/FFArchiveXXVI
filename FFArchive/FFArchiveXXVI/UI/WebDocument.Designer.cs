@@ -37,8 +37,10 @@ partial class WebDocument
         WebAddressBox = new ToolStripSpringComboBox();
         GoButton = new ToolStripButton();
         WebStatusStrip = new StatusStrip();
-        webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
         StatusLabel = new ToolStripStatusLabel();
+        webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
+        StopButton = new ToolStripButton();
+        AddBookmarkButton = new ToolStripButton();
         WebNavToolStrip.SuspendLayout();
         WebStatusStrip.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
@@ -46,7 +48,7 @@ partial class WebDocument
         // 
         // WebNavToolStrip
         // 
-        WebNavToolStrip.Items.AddRange(new ToolStripItem[] { BackButton, ForwardButton, ReloadButton, toolStripSeparator1, WebAddressBox, GoButton });
+        WebNavToolStrip.Items.AddRange(new ToolStripItem[] { BackButton, ForwardButton, ReloadButton, StopButton, toolStripSeparator1, WebAddressBox, GoButton, AddBookmarkButton });
         WebNavToolStrip.Location = new Point(0, 0);
         WebNavToolStrip.Name = "WebNavToolStrip";
         WebNavToolStrip.Size = new Size(800, 25);
@@ -61,6 +63,7 @@ partial class WebDocument
         BackButton.Name = "BackButton";
         BackButton.Size = new Size(23, 22);
         BackButton.Text = "Back";
+        BackButton.Click += BackButton_Click;
         // 
         // ForwardButton
         // 
@@ -70,6 +73,7 @@ partial class WebDocument
         ForwardButton.Name = "ForwardButton";
         ForwardButton.Size = new Size(23, 22);
         ForwardButton.Text = "Forward";
+        ForwardButton.Click += ForwardButton_Click;
         // 
         // ReloadButton
         // 
@@ -79,6 +83,7 @@ partial class WebDocument
         ReloadButton.Name = "ReloadButton";
         ReloadButton.Size = new Size(23, 22);
         ReloadButton.Text = "Refresh";
+        ReloadButton.Click += ReloadButton_Click;
         // 
         // toolStripSeparator1
         // 
@@ -90,7 +95,7 @@ partial class WebDocument
         WebAddressBox.AutoCompleteMode = AutoCompleteMode.Suggest;
         WebAddressBox.AutoCompleteSource = AutoCompleteSource.AllUrl;
         WebAddressBox.Name = "WebAddressBox";
-        WebAddressBox.Size = new Size(659, 25);
+        WebAddressBox.Size = new Size(613, 25);
         // 
         // GoButton
         // 
@@ -100,6 +105,7 @@ partial class WebDocument
         GoButton.Name = "GoButton";
         GoButton.Size = new Size(23, 22);
         GoButton.Text = "toolStripButton1";
+        GoButton.Click += GoButton_Click;
         // 
         // WebStatusStrip
         // 
@@ -109,6 +115,12 @@ partial class WebDocument
         WebStatusStrip.Size = new Size(800, 22);
         WebStatusStrip.TabIndex = 1;
         WebStatusStrip.Text = "statusStrip1";
+        // 
+        // StatusLabel
+        // 
+        StatusLabel.Name = "StatusLabel";
+        StatusLabel.Size = new Size(24, 17);
+        StatusLabel.Text = "Init";
         // 
         // webView21
         // 
@@ -122,11 +134,25 @@ partial class WebDocument
         webView21.TabIndex = 2;
         webView21.ZoomFactor = 1D;
         // 
-        // StatusLabel
+        // StopButton
         // 
-        StatusLabel.Name = "StatusLabel";
-        StatusLabel.Size = new Size(24, 17);
-        StatusLabel.Text = "Init";
+        StopButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        StopButton.Image = (Image)resources.GetObject("StopButton.Image");
+        StopButton.ImageTransparentColor = Color.Magenta;
+        StopButton.Name = "StopButton";
+        StopButton.Size = new Size(23, 22);
+        StopButton.Text = "Stop";
+        StopButton.Click += StopButton_Click;
+        // 
+        // AddBookmarkButton
+        // 
+        AddBookmarkButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        AddBookmarkButton.Image = (Image)resources.GetObject("AddBookmarkButton.Image");
+        AddBookmarkButton.ImageTransparentColor = Color.Magenta;
+        AddBookmarkButton.Name = "AddBookmarkButton";
+        AddBookmarkButton.Size = new Size(23, 22);
+        AddBookmarkButton.Text = "Add Bookmark";
+        AddBookmarkButton.Click += AddBookmarkButton_Click;
         // 
         // WebDocument
         // 
@@ -159,4 +185,6 @@ partial class WebDocument
     private ToolStripSpringComboBox WebAddressBox;
     private ToolStripButton GoButton;
     private ToolStripStatusLabel StatusLabel;
+    private ToolStripButton StopButton;
+    private ToolStripButton AddBookmarkButton;
 }

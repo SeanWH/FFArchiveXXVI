@@ -3,9 +3,11 @@
 namespace FFArchiveXXVI.UI;
 
 using System;
+using System.Text;
 using System.Windows.Forms;
 
 using FFArchiveXXVI.Model;
+using FFArchiveXXVI.Model.Addresses;
 
 using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.WinForms;
@@ -103,6 +105,7 @@ public partial class WebDocument : DockContent
     {
         InitializeComponent();
         AttachControlEventHandlers(webView21);
+        NavigateToUrl("https://www.fanfiction.net");
         HandleResize();
     }
 
@@ -123,7 +126,8 @@ public partial class WebDocument : DockContent
 
     private void HandleResize()
     {
-        return;
+        // Resize the webview
+        webView21.Size = this.ClientSize - new System.Drawing.Size(webView21.Location);
     }
 
     private void AttachControlEventHandlers(WebView2 webView)
@@ -139,7 +143,7 @@ public partial class WebDocument : DockContent
 
     private void WebView_Disposed(object? sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        return;
     }
 
     private void WebView_KeyUp(object? sender, KeyEventArgs e)
@@ -178,12 +182,94 @@ public partial class WebDocument : DockContent
         this.webView21.CoreWebView2.FrameCreated += WebView_HandleIFrames;
 
         UpdateTitleWithEvent("CoreWebView2InitializationCompleted succeeded");
+
         EnableButtons();
     }
 
     private void CoreWebView2_ProcessFailed(object? sender, CoreWebView2ProcessFailedEventArgs e)
     {
-        throw new NotImplementedException();
+        void ReinitIfSelectedByUser(string caption, string message)
+        {
+            this.webView21.BeginInvoke(new Action(() =>
+            {
+                var selection = MessageBox.Show(this, message, caption, MessageBoxButtons.YesNo);
+                if (selection == DialogResult.Yes)
+                {
+                    this.Controls.Remove(this.webView21);
+                    this.webView21.Dispose();
+                    this.webView21 = GetReplacementControl(false);
+                    // Set background transparent
+                    this.webView21.DefaultBackgroundColor = System.Drawing.Color.Transparent;
+                    this.Controls.Add(this.webView21);
+                    HandleResize();
+                }
+            }));
+        }
+
+        void ReloadIfSelectedByUser(string caption, string message)
+        {
+            this.webView21.BeginInvoke(new Action(() =>
+            {
+                var selection = MessageBox.Show(this, message, caption, MessageBoxButtons.YesNo);
+                if (selection == DialogResult.Yes)
+                {
+                    this.webView21.CoreWebView2.Reload();
+                }
+            }));
+        }
+
+        this.webView21.Invoke(new Action(() =>
+        {
+            StringBuilder messageBuilder = new StringBuilder();
+            messageBuilder.AppendLine($"Process kind: {e.ProcessFailedKind}");
+            messageBuilder.AppendLine($"Reason: {e.Reason}");
+            messageBuilder.AppendLine($"Exit code: {e.ExitCode}");
+            messageBuilder.AppendLine($"Process description: {e.ProcessDescription}");
+            MessageBox.Show(messageBuilder.ToString(), "Child process failed", MessageBoxButtons.OK);
+        }));
+
+        if (e.ProcessFailedKind == CoreWebView2ProcessFailedKind.BrowserProcessExited)
+        {
+            ReinitIfSelectedByUser("Browser process exited",
+                "Browser process exited unexpectedly. Recreate webview?");
+        }
+        else if (e.ProcessFailedKind == CoreWebView2ProcessFailedKind.RenderProcessUnresponsive)
+        {
+            ReinitIfSelectedByUser("Web page unresponsive",
+                "Browser render process has stopped responding. Recreate webview?");
+        }
+        else if (e.ProcessFailedKind == CoreWebView2ProcessFailedKind.RenderProcessExited)
+        {
+            ReloadIfSelectedByUser("Web page unresponsive",
+                "Browser render process exited unexpectedly. Reload page?");
+        }
+    }
+
+    private WebView2 GetReplacementControl(bool useNewEnvironment)
+    {
+        WebView2 webView = this.webView21;
+        WebView2 replacementControl = new WebView2();
+        ((System.ComponentModel.ISupportInitialize)(replacementControl)).BeginInit();
+        // Setup properties.
+        if (useNewEnvironment)
+        {
+            // Create a new CoreWebView2CreationProperties instance so the environment
+            // is made anew.
+            replacementControl.CreationProperties = new CoreWebView2CreationProperties();
+            replacementControl.CreationProperties.BrowserExecutableFolder = webView.CreationProperties.BrowserExecutableFolder;
+            replacementControl.CreationProperties.Language = webView.CreationProperties.Language;
+            replacementControl.CreationProperties.UserDataFolder = webView.CreationProperties.UserDataFolder;
+            replacementControl.CreationProperties.AdditionalBrowserArguments = webView.CreationProperties.AdditionalBrowserArguments;
+        }
+        else
+        {
+            replacementControl.CreationProperties = webView.CreationProperties;
+        }
+        AttachControlEventHandlers(replacementControl);
+        replacementControl.Source = webView.Source ?? new Uri("https://www.fanfiction.net");
+        ((System.ComponentModel.ISupportInitialize)(replacementControl)).EndInit();
+
+        return replacementControl;
     }
 
     private void CoreWebView2_DocumentTitleChanged(object? sender, object e)
@@ -207,6 +293,7 @@ public partial class WebDocument : DockContent
     private void WebView_NavigationCompleted(object? sender, CoreWebView2NavigationCompletedEventArgs e)
     {
         UpdateStatusLabelWithEvent("Navigation Completed");
+        SavePage();
     }
 
     private void WebView_NavigationStarting(object? sender, CoreWebView2NavigationStartingEventArgs e)
@@ -219,6 +306,8 @@ public partial class WebDocument : DockContent
         BackButton.Enabled = isEnabled && webView21 != null && webView21.CanGoBack;
         ForwardButton.Enabled = isEnabled && webView21 != null && webView21.CanGoForward;
         ReloadButton.Enabled = isEnabled;
+        StopButton.Enabled = isEnabled;
+        AddBookmarkButton.Enabled = isEnabled;
         GoButton.Enabled = isEnabled;
     }
 
@@ -230,5 +319,108 @@ public partial class WebDocument : DockContent
     private void DisableButtons(object sender, EventArgs e)
     {
         UpdateButtons(false);
+    }
+
+    private void StopButton_Click(object sender, EventArgs e)
+    {
+        webView21?.Stop();
+    }
+
+    private void BackButton_Click(object sender, EventArgs e)
+    {
+        webView21?.GoBack();
+    }
+
+    private void ForwardButton_Click(object sender, EventArgs e)
+    {
+        webView21?.GoForward();
+    }
+
+    private void ReloadButton_Click(object sender, EventArgs e)
+    {
+        webView21?.Reload();
+    }
+
+    private void GoButton_Click(object sender, EventArgs e)
+    {
+        NavigateToUrl(WebAddressBox.Text.Trim());
+    }
+
+    private void NavigateToUrl(string rawUrl)
+    {
+        Uri uri = null;
+
+        if (Uri.IsWellFormedUriString(rawUrl, UriKind.Absolute))
+        {
+            uri = new Uri(rawUrl);
+        }
+        else if (!rawUrl.Contains(" ") && rawUrl.Contains("."))
+        {
+            // An invalid URI contains a dot and no spaces, try tacking http:// on the front.
+            uri = new Uri("http://" + rawUrl);
+        }
+        else
+        {
+            // Otherwise treat it as a web search.
+            uri = new Uri("https://bing.com/search?q=" +
+                String.Join("+", Uri.EscapeDataString(rawUrl).Split(new string[] { "%20" }, StringSplitOptions.RemoveEmptyEntries)));
+        }
+
+        webView21.Source = uri;
+    }
+
+    private void WebAddressBox_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
+        {
+            e.Handled = true;
+            e.SuppressKeyPress = true;
+            NavigateToUrl(WebAddressBox.Text.Trim());
+        }
+    }
+
+    private void WebAddressBox_LostFocus(object sender, EventArgs e)
+    {
+        if (webView21?.Source.AbsoluteUri != WebAddressBox.Text)
+        {
+            NavigateToUrl(WebAddressBox.Text.Trim());
+        }
+    }
+
+    private void AddBookmarkButton_Click(object sender, EventArgs e)
+    {
+    }
+
+    private async void SavePage()
+    {
+        if (webView21?.CoreWebView2 != null && ShouldSavePage())
+        {
+            string pageContent = await webView21.CoreWebView2.ExecuteScriptAsync("document.documentElement.outerHTML");
+            string pageContentDecoded = System.Text.RegularExpressions.Regex.Unescape(pageContent.Trim('"'));
+
+            var htmlFileData = HtmlFileDataParser.ParseHtml(
+                webView21.CoreWebView2.DocumentTitle,
+                pageContentDecoded);
+
+            string savePath = Path.Combine(AppSettings.Current.SavePath, htmlFileData.SaveFolderName);
+            if (!Directory.Exists(savePath))
+            {
+                Directory.CreateDirectory(savePath);
+            }
+            savePath = Path.Combine(savePath, htmlFileData.FileName);
+            File.WriteAllText(savePath, htmlFileData.PageText, Encoding.UTF8);
+
+            UpdateStatusLabelWithEvent($"Saving: {webView21.CoreWebView2.DocumentTitle}");
+        }
+    }
+
+    private bool ShouldSavePage()
+    {
+        IFfnAddress ffnAddress = FfnAddressFactory.GetAddress(webView21?.Source.AbsoluteUri ?? "");
+        if (ffnAddress is StoryAddress)
+        {
+            return true;
+        }
+        return false;
     }
 }

@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFArchive", "FFArchive\FFAr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFArchiveXXVI", "FFArchiveXXVI\FFArchiveXXVI.csproj", "{AF7F3DFA-A242-4CC4-92EF-6969E0F803B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFArchiver", "FFArchiver\FFArchiver.csproj", "{38C41BAA-178D-126B-6421-9D3A581DED53}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFArchiver.Tests", "FFArchiver.Tests\FFArchiver.Tests.csproj", "{ADC7E6BE-31B1-8F9A-5519-C37F844DCE70}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebView2WindowsFormsBrowser", "WebView2WindowsFormsBrowser\WebView2WindowsFormsBrowser.csproj", "{0518CB80-A3C4-46B7-0E9A-588B513A8021}"
 EndProject
 Global
@@ -27,14 +23,6 @@ Global
 		{AF7F3DFA-A242-4CC4-92EF-6969E0F803B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF7F3DFA-A242-4CC4-92EF-6969E0F803B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF7F3DFA-A242-4CC4-92EF-6969E0F803B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38C41BAA-178D-126B-6421-9D3A581DED53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38C41BAA-178D-126B-6421-9D3A581DED53}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38C41BAA-178D-126B-6421-9D3A581DED53}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38C41BAA-178D-126B-6421-9D3A581DED53}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ADC7E6BE-31B1-8F9A-5519-C37F844DCE70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ADC7E6BE-31B1-8F9A-5519-C37F844DCE70}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ADC7E6BE-31B1-8F9A-5519-C37F844DCE70}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ADC7E6BE-31B1-8F9A-5519-C37F844DCE70}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0518CB80-A3C4-46B7-0E9A-588B513A8021}.Debug|Any CPU.ActiveCfg = Release Stable APIs|Any CPU
 		{0518CB80-A3C4-46B7-0E9A-588B513A8021}.Debug|Any CPU.Build.0 = Release Stable APIs|Any CPU
 		{0518CB80-A3C4-46B7-0E9A-588B513A8021}.Release|Any CPU.ActiveCfg = Release Stable APIs|Any CPU

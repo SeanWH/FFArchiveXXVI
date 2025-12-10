@@ -52,22 +52,22 @@ public static class WebViewTools
 
     public static string GetStartPageUri(CoreWebView2 webView2)
     {
-        string uri = "https://appassets.example/AppStartPage.html";
+        string uri = "https://www.fanfiction.net";
         if (webView2 == null)
         {
             return uri;
         }
-        string sdkBuildVersion = GetSdkBuildVersion(),
-               runtimeVersion = GetRuntimeVersion(webView2),
-               appPath = GetAppPath(),
-               runtimePath = GetRuntimePath(webView2);
-        string newUri = $"{uri}?sdkBuild={sdkBuildVersion}&runtimeVersion={runtimeVersion}" +
-            $"&appPath={appPath}&runtimePath={runtimePath}";
-        return newUri;
+        return webView2.Source;
     }
 
     private static string GetAppPath()
     {
         return System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+    }
+
+    internal static string GetSafeFileNameFromTitle(string documentTitle)
+    {
+        return string.Join("_", documentTitle.Split(
+            System.IO.Path.GetInvalidFileNameChars()));
     }
 }

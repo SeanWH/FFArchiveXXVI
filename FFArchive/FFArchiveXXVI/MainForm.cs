@@ -17,6 +17,7 @@ public partial class MainForm : Form
 
     private AppSettings _appSettings;
     private readonly string _layoutFile;
+    private Dictionary<string, WebDocument> _openDocuments = new();
 
     public MainForm()
     {
@@ -30,6 +31,7 @@ public partial class MainForm : Form
         _localFileNavPanel = new LocalFileNavPanel();
         _bookmarkNavPanel = new BookmarkNavPanel();
         _historyNavPanel = new HistoryNavPanel();
+        _openDocuments.Add("about:blank", new WebDocument());
 
         _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
         visualStudioToolStripExtender1.DefaultRenderer = _toolStripProfessionalRenderer;
@@ -228,12 +230,17 @@ public partial class MainForm : Form
         if (File.Exists(_layoutFile))
         {
             dockPanel1.LoadFromXml(_layoutFile, _deserializeDockContent);
+            if (dockPanel1.Documents.Count() == 0)
+            {
+                _openDocuments["about:blank"]?.Show(dockPanel1, DockState.Document);
+            }
         }
         else
         {
             _localFileNavPanel?.Show(dockPanel1, DockState.DockLeft);
             _bookmarkNavPanel?.Show(dockPanel1, DockState.DockLeft);
             _historyNavPanel?.Show(dockPanel1, DockState.DockLeft);
+            _openDocuments["about:blank"]?.Show(dockPanel1, DockState.Document);
         }
     }
 }
