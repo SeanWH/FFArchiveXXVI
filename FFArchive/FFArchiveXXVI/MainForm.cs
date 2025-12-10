@@ -1,6 +1,7 @@
 namespace FFArchiveXXVI;
 
 using FFArchiveXXVI.Model;
+using FFArchiveXXVI.Model.Bookmarks;
 using FFArchiveXXVI.UI;
 
 using WeifenLuo.WinFormsUI.Docking;
@@ -18,6 +19,9 @@ public partial class MainForm : Form
     private AppSettings _appSettings;
     private readonly string _layoutFile;
     private Dictionary<string, WebDocument> _openDocuments = new();
+
+    private string _dbName = "data_store.db";
+    private string _connectionString;
 
     public MainForm()
     {
@@ -242,5 +246,10 @@ public partial class MainForm : Form
             _historyNavPanel?.Show(dockPanel1, DockState.DockLeft);
             _openDocuments["about:blank"]?.Show(dockPanel1, DockState.Document);
         }
+    }
+
+    private void importBookmarkFileToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        List<Bookmark> bookmarks = BookmarkImporter.ImportBookmarks();
     }
 }

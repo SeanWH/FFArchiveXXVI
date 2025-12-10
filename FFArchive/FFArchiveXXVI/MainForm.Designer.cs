@@ -48,6 +48,8 @@ partial class MainForm
         vS2013BlueTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2013BlueTheme();
         vS2013LightTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2013LightTheme();
         visualStudioToolStripExtender1 = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(components);
+        toolStripMenuItem1 = new ToolStripSeparator();
+        importBookmarkFileToolStripMenuItem = new ToolStripMenuItem();
         menuStrip1.SuspendLayout();
         SuspendLayout();
         // 
@@ -75,7 +77,7 @@ partial class MainForm
         // 
         // toolsToolStripMenuItem
         // 
-        toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { optionsToolStripMenuItem });
+        toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { optionsToolStripMenuItem, toolStripMenuItem1, importBookmarkFileToolStripMenuItem });
         toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
         toolsToolStripMenuItem.Size = new Size(47, 20);
         toolsToolStripMenuItem.Text = "Tools";
@@ -83,7 +85,7 @@ partial class MainForm
         // optionsToolStripMenuItem
         // 
         optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-        optionsToolStripMenuItem.Size = new Size(116, 22);
+        optionsToolStripMenuItem.Size = new Size(188, 22);
         optionsToolStripMenuItem.Text = "Options";
         optionsToolStripMenuItem.Click += OptionsToolStripMenuItem_Click;
         // 
@@ -109,6 +111,18 @@ partial class MainForm
         // visualStudioToolStripExtender1
         // 
         visualStudioToolStripExtender1.DefaultRenderer = null;
+        // 
+        // toolStripMenuItem1
+        // 
+        toolStripMenuItem1.Name = "toolStripMenuItem1";
+        toolStripMenuItem1.Size = new Size(185, 6);
+        // 
+        // importBookmarkFileToolStripMenuItem
+        // 
+        importBookmarkFileToolStripMenuItem.Name = "importBookmarkFileToolStripMenuItem";
+        importBookmarkFileToolStripMenuItem.Size = new Size(188, 22);
+        importBookmarkFileToolStripMenuItem.Text = "Import Bookmark File";
+        importBookmarkFileToolStripMenuItem.Click += importBookmarkFileToolStripMenuItem_Click;
         // 
         // MainForm
         // 
@@ -150,4 +164,6 @@ partial class MainForm
     private ToolStripMenuItem exitToolStripMenuItem;
     private ToolStripMenuItem toolsToolStripMenuItem;
     private ToolStripMenuItem optionsToolStripMenuItem;
+    private ToolStripSeparator toolStripMenuItem1;
+    private ToolStripMenuItem importBookmarkFileToolStripMenuItem;
 }

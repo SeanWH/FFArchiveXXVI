@@ -1,8 +1,8 @@
 ﻿namespace FFArchiveXXVI.Model.Collections;
 
-using FFArchiveXXVI.Model.Bookmarks;
-
 using System.Collections.Generic;
+
+using FFArchiveXXVI.Model.Bookmarks;
 
 /// <summary>
 /// A List<Bookmark> that prevents duplicate bookmarks from being added.
@@ -10,6 +10,17 @@ using System.Collections.Generic;
 public class BookmarkCollection : List<Bookmark>
 {
     private readonly List<Bookmark> List = [];
+
+    public BookmarkCollection(List<Bookmark> list)
+    {
+        // Saying this.List = list would bypass
+        // uniqueness requirement--don't want to
+        // do that.
+        foreach (Bookmark b in list)
+        {
+            Add(b);
+        }
+    }
 
     public new void Add(Bookmark item)
     {
