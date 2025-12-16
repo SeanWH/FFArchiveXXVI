@@ -17,6 +17,7 @@ public partial class Settings : Form
         SaveTxtFilesCheckBox.Checked = AppSettings.SaveDocumentAsText;
         ThemeComboBox.SelectedIndex = AppSettings.CurrentThemeIndex;
         AutoSaveBookmarksCheckBox.Checked = AppSettings.AutoSaveBookmarks;
+        UseNewWindowCheckBox.Checked = AppSettings.UseNewWindow;
     }
 
     private void ThemeComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -66,5 +67,10 @@ public partial class Settings : Form
 
     private void ButtonApply_Click(object sender, EventArgs e)
     {
+    }
+
+    private void UseNewWindowCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+        AppSettings.UseNewWindow = UseNewWindowCheckBox.Checked;
     }
 }

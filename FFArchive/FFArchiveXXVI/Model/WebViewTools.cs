@@ -62,7 +62,7 @@ public static class WebViewTools
 
     private static string GetAppPath()
     {
-        return System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+        return AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
     }
 
     internal static string GetSafeFileNameFromTitle(string documentTitle)

@@ -45,6 +45,7 @@ partial class Settings
         SaveTxtFilesCheckBox = new CheckBox();
         AutoSaveBookmarksCheckBox = new CheckBox();
         ArchiveHtmlCheckBox = new CheckBox();
+        UseNewWindowCheckBox = new CheckBox();
         groupBox2 = new GroupBox();
         tableLayoutPanel4 = new TableLayoutPanel();
         label1 = new Label();
@@ -205,6 +206,7 @@ partial class Settings
         flowLayoutPanel2.Controls.Add(SaveTxtFilesCheckBox);
         flowLayoutPanel2.Controls.Add(AutoSaveBookmarksCheckBox);
         flowLayoutPanel2.Controls.Add(ArchiveHtmlCheckBox);
+        flowLayoutPanel2.Controls.Add(UseNewWindowCheckBox);
         flowLayoutPanel2.Dock = DockStyle.Fill;
         flowLayoutPanel2.FlowDirection = FlowDirection.TopDown;
         flowLayoutPanel2.Location = new Point(3, 63);
@@ -255,6 +257,17 @@ partial class Settings
         ArchiveHtmlCheckBox.Text = "Archive HTML Files in Zip File";
         ArchiveHtmlCheckBox.UseVisualStyleBackColor = true;
         ArchiveHtmlCheckBox.CheckedChanged += ArchiveHtmlCheckBox_CheckedChanged;
+        // 
+        // UseNewWindowCheckBox
+        // 
+        UseNewWindowCheckBox.AutoSize = true;
+        UseNewWindowCheckBox.Location = new Point(150, 28);
+        UseNewWindowCheckBox.Name = "checkBoxUseNewWindow";
+        UseNewWindowCheckBox.Size = new Size(226, 19);
+        UseNewWindowCheckBox.TabIndex = 4;
+        UseNewWindowCheckBox.Text = "Open Each Web Page in New Window";
+        UseNewWindowCheckBox.UseVisualStyleBackColor = true;
+        UseNewWindowCheckBox.CheckedChanged += UseNewWindowCheckBox_CheckedChanged;
         // 
         // groupBox2
         // 
@@ -361,4 +374,5 @@ partial class Settings
     private ComboBox ThemeComboBox;
     private CheckBox AutoSaveBookmarksCheckBox;
     private CheckBox ArchiveHtmlCheckBox;
+    private CheckBox UseNewWindowCheckBox;
 }

@@ -122,7 +122,7 @@ partial class MainForm
         importBookmarkFileToolStripMenuItem.Name = "importBookmarkFileToolStripMenuItem";
         importBookmarkFileToolStripMenuItem.Size = new Size(188, 22);
         importBookmarkFileToolStripMenuItem.Text = "Import Bookmark File";
-        importBookmarkFileToolStripMenuItem.Click += importBookmarkFileToolStripMenuItem_Click;
+        importBookmarkFileToolStripMenuItem.Click += ImportBookmarkFileToolStripMenuItem_Click;
         // 
         // MainForm
         // 

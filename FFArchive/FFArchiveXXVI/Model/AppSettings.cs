@@ -21,6 +21,9 @@ public class AppSettings
     public bool SaveDocumentAsText { get; set; } = false;
 
     [JsonInclude]
+    public bool UseNewWindow { get; set; } = false;
+
+    [JsonInclude]
     public int CurrentThemeIndex { get; set; } = 0;
 
     [JsonInclude]

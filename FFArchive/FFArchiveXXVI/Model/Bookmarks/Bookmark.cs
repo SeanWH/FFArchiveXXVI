@@ -1,15 +1,24 @@
 ﻿namespace FFArchiveXXVI.Model.Bookmarks;
 
-using FFArchiveXXVI.Model.Addresses;
-
 using System;
 
-public class Bookmark(string title, string url) : TreeNode, IComparable
+using FFArchiveXXVI.Model.Addresses;
+
+public class Bookmark : TreeNode, IComparable
 {
-    public string? Title { get; set; } = title;
-    public string? Url { get; set; } = url;
-    public IFfnAddress? Address { get; set; } = FfnAddressFactory.GetAddress(url);
-    public FfnUrlType Target { get; } = FfnUrlUtilities.GetFfnUrlTypeFromUrl(url);
+    public Bookmark(string title, string url)
+    {
+        Title = title;
+        Url = url;
+        Address = FfnAddressFactory.GetAddress(url);
+        Target = FfnUrlUtilities.GetFfnUrlTypeFromUrl(url);
+        ToolTipText = url;
+    }
+
+    public string? Title { get; set; }
+    public string? Url { get; set; }
+    public IFfnAddress? Address { get; set; }
+    public FfnUrlType Target { get; }
     public DateTime Created { get; set; } = DateTime.Now;
     public DateTime Modified { get; set; } = DateTime.Now;
 

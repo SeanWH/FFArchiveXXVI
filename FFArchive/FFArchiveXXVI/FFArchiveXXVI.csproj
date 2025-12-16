@@ -9,6 +9,34 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Image\book.png" />
+      <None Remove="Image\bookmark-2.png" />
+      <None Remove="Image\bookmark-folder.png" />
+      <None Remove="Image\bookmark-new-6.png" />
+      <None Remove="Image\bookmarks-organize.png" />
+      <None Remove="Image\books.png" />
+      <None Remove="Image\folder-page.png" />
+      <None Remove="Image\folder.png" />
+      <None Remove="Image\go-next-6.png" />
+      <None Remove="Image\go-next-9.png" />
+      <None Remove="Image\go-previous-6.png" />
+      <None Remove="Image\go-previous-9.png" />
+      <None Remove="Image\go-up-4.png" />
+      <None Remove="Image\html-button.png" />
+      <None Remove="Image\process-stop-2.png" />
+      <None Remove="Image\rtf-button.png" />
+      <None Remove="Image\text-button.png" />
+      <None Remove="Image\text-html %282%29.png" />
+      <None Remove="Image\text-html-2.png" />
+      <None Remove="Image\text-html.png" />
+      <None Remove="Image\text-x-generic-template.png" />
+      <None Remove="Image\text-x-script.png" />
+      <None Remove="Image\view-refresh-4.png" />
+      <None Remove="Image\view-refresh-7.png" />
+      <None Remove="Image\x-office-document.png" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="DockPanelSuite" Version="3.1.1" />
         <PackageReference Include="DockPanelSuite.ThemeVS2003" Version="3.1.1" />
         <PackageReference Include="DockPanelSuite.ThemeVS2005" Version="3.1.1" />
@@ -16,7 +44,17 @@
         <PackageReference Include="DockPanelSuite.ThemeVS2013" Version="3.1.1" />
         <PackageReference Include="DockPanelSuite.ThemeVS2015" Version="3.1.1" />
         <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
-        <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="10.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.1">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.1">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3650.58" />
         <PackageReference Include="Roslynator.Analyzers" Version="4.14.1">
             <PrivateAssets>all</PrivateAssets>
@@ -26,7 +64,34 @@
 
     <ItemGroup>
         <Folder Include="Model\LocalFiles\" />
-        <Folder Include="Image\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Image\book.png" />
+      <Resource Include="Image\bookmark-2.png" />
+      <Resource Include="Image\bookmark-folder.png" />
+      <Resource Include="Image\bookmark-new-6.png" />
+      <Resource Include="Image\bookmarks-organize.png" />
+      <Resource Include="Image\books.png" />
+      <Resource Include="Image\folder-page.png" />
+      <Resource Include="Image\folder.png" />
+      <Resource Include="Image\go-next-6.png" />
+      <Resource Include="Image\go-next-9.png" />
+      <Resource Include="Image\go-previous-6.png" />
+      <Resource Include="Image\go-previous-9.png" />
+      <Resource Include="Image\go-up-4.png" />
+      <Resource Include="Image\html-button.png" />
+      <Resource Include="Image\process-stop-2.png" />
+      <Resource Include="Image\rtf-button.png" />
+      <Resource Include="Image\text-button.png" />
+      <Resource Include="Image\text-html (2).png" />
+      <Resource Include="Image\text-html-2.png" />
+      <Resource Include="Image\text-html.png" />
+      <Resource Include="Image\text-x-generic-template.png" />
+      <Resource Include="Image\text-x-script.png" />
+      <Resource Include="Image\view-refresh-4.png" />
+      <Resource Include="Image\view-refresh-7.png" />
+      <Resource Include="Image\x-office-document.png" />
     </ItemGroup>
 
     <ItemGroup>

@@ -4,29 +4,30 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-using hap = HtmlAgilityPack;
+using htmlAgilityPack = HtmlAgilityPack;
 
 public static class BookmarkImporter
 {
-    public static List<Bookmark> ImportBookmarks()
+    public static List<Bookmark> ImportBookmarks(string siteName)
     {
         string filePath = GetFilePathFromUser();
-        List<Bookmark> bookmarks = new();
+        List<Bookmark> bookmarks = [];
         if (string.IsNullOrEmpty(filePath))
         {
             return bookmarks;
         }
-        hap.HtmlDocument htmlDoc = new();
+        htmlAgilityPack.HtmlDocument htmlDoc = new();
         htmlDoc.Load(filePath);
         var linkNodes = htmlDoc.DocumentNode.SelectNodes("//a");
         if (linkNodes != null)
         {
             foreach (var linkNode in linkNodes)
             {
-                string title = CleanBookmarkTitle(linkNode.InnerText.Trim());
                 string url = linkNode.GetAttributeValue("HREF", string.Empty).Trim();
-                if (!string.IsNullOrEmpty(url))
+                if (!string.IsNullOrEmpty(url) && url.Contains(siteName, StringComparison.CurrentCultureIgnoreCase))
                 {
+                    string rawTitle = linkNode.InnerText.Trim();
+                    string title = url.Contains("community", StringComparison.CurrentCultureIgnoreCase) ? rawTitle[..rawTitle.IndexOf('|')] : CleanBookmarkTitle(rawTitle);
                     bookmarks.Add(new Bookmark(title, url));
                 }
             }
@@ -43,24 +44,25 @@ public static class BookmarkImporter
             return "Untitled";
         }
 
-        if (title.Contains("FanFiction.Net"))
+        if (title.Contains("FanFiction.Net", StringComparison.CurrentCultureIgnoreCase))
         {
-            cleanTitle.Replace("FanFiction.Net", "");
+            cleanTitle = cleanTitle.Replace("FanFiction.Net", "");
         }
 
-        if (title.Contains("C2"))
+        if (title.Contains("C2", StringComparison.CurrentCultureIgnoreCase))
         {
-            cleanTitle.Replace("C2", "");
+            cleanTitle = cleanTitle.Replace("C2", "");
         }
 
-        if (title.Contains(":"))
+        if (title.Contains(':') || title.Contains('|'))
         {
-            cleanTitle.Replace(":", "");
+            cleanTitle = cleanTitle.Replace(":", "");
+            cleanTitle = cleanTitle.Replace("|", "");
         }
 
-        if (title.Contains("Profile"))
+        if (title.Contains("Profile", StringComparison.CurrentCultureIgnoreCase))
         {
-            cleanTitle.Replace("Profile", "");
+            cleanTitle = cleanTitle.Replace("Profile", "");
         }
         return cleanTitle.Trim();
     }

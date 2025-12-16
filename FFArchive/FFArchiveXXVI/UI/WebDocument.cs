@@ -17,7 +17,7 @@ using WeifenLuo.WinFormsUI.Docking;
 public partial class WebDocument : DockContent
 {
     private string _lastInitializeScriptId;
-    private List<CoreWebView2Frame> _webView2Frames = new();
+    private List<CoreWebView2Frame> _webView2Frames = [];
 
     private void WebView_HandleIFrames(object sender, CoreWebView2FrameCreatedEventArgs args)
     {

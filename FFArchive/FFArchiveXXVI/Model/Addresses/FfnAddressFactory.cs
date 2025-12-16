@@ -1,6 +1,8 @@
 ﻿namespace FFArchiveXXVI.Model.Addresses;
 
-public static class FfnAddressFactory
+using System.Text.RegularExpressions;
+
+public static partial class FfnAddressFactory
 {
     private const int AUTHOR_ID = 2;
     private const int AUTHOR_NAME = 3;
@@ -44,6 +46,17 @@ public static class FfnAddressFactory
 
         string[] parts = SplitAddress(address);
 
+        //fix for a very rare and old format of ff net user address
+        if (parts.Length == 2)
+        {
+            Regex idMatch = IdRegex();
+            var id = idMatch.Match(parts[1]);
+            if (id != null)
+            {
+                return new AuthorAddress($"https://www.fanfiction.net/u/{id.Value}/", "Old-Style Address", id.Value);
+            }
+        }
+
         return parts[TARGET_IDX] switch
         {
             "s" => new StoryAddress(address, parts[STORY_ID], parts[STORY_NAME], "", parts[CHAPTER_IDX]),
@@ -52,4 +65,7 @@ public static class FfnAddressFactory
             _ => new PageAddress(address),
         };
     }
+
+    [GeneratedRegex(@"\d+")]
+    private static partial Regex IdRegex();
 }

@@ -18,10 +18,7 @@ public partial class MainForm : Form
 
     private AppSettings _appSettings;
     private readonly string _layoutFile;
-    private Dictionary<string, WebDocument> _openDocuments = new();
-
-    private string _dbName = "data_store.db";
-    private string _connectionString;
+    private Dictionary<string, WebDocument> _openDocuments = [];
 
     public MainForm()
     {
@@ -234,7 +231,7 @@ public partial class MainForm : Form
         if (File.Exists(_layoutFile))
         {
             dockPanel1.LoadFromXml(_layoutFile, _deserializeDockContent);
-            if (dockPanel1.Documents.Count() == 0)
+            if (!dockPanel1.Documents.Any())
             {
                 _openDocuments["about:blank"]?.Show(dockPanel1, DockState.Document);
             }
@@ -248,8 +245,9 @@ public partial class MainForm : Form
         }
     }
 
-    private void importBookmarkFileToolStripMenuItem_Click(object sender, EventArgs e)
+    private void ImportBookmarkFileToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        List<Bookmark> bookmarks = BookmarkImporter.ImportBookmarks();
+        List<Bookmark> bookmarks = BookmarkImporter.ImportBookmarks("fanfiction.net");
+        _bookmarkNavPanel.AddBookmarks(bookmarks);
     }
 }

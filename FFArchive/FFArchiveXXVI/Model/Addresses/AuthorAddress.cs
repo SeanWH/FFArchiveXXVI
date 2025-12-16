@@ -1,14 +1,21 @@
 ﻿namespace FFArchiveXXVI.Model.Addresses;
 
-using FFArchiveXXVI.Model.Extensions;
-
 using System.Diagnostics.CodeAnalysis;
 
-public sealed class AuthorAddress(string authorName, string address, string linkedId) : IFfnAddress
+using FFArchiveXXVI.Model.Extensions;
+
+public sealed class AuthorAddress : IFfnAddress
 {
-    public string Address { get; } = address;
-    public string LinkedId { get; } = linkedId;
-    public string AuthorName { get; } = authorName;
+    public AuthorAddress(string address, string authorName, string linkedId)
+    {
+        Address = address;
+        AuthorName = authorName;
+        LinkedId = linkedId;
+    }
+
+    public string Address { get; }
+    public string LinkedId { get; }
+    public string AuthorName { get; }
     public FfnUrlType LinkTarget => FfnUrlType.Author;
 
     public int CompareTo(IFfnAddress? other)
